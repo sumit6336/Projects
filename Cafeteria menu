@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Menu {
+private:
+    string item;
+    int price, itemNo;
+
+public:
+    Menu(int itemNo, string item, int price) {
+        this->itemNo = itemNo;
+        this->item = item;
+        this->price = price;
+    }
+
+    string getItem() {
+        return item;
+    }
+
+    int getItemNo() {
+        return itemNo;
+    }
+
+    int getPrice() {
+        return price;
+    }
+};
+
+class Cafe {
+private:
+    vector<Menu> ve;
+
+public:
+    void add(int itemNo, string item, int price) {
+        Menu menu(itemNo, item, price);
+        ve.push_back(menu);
+    }
+
+    void order() {
+        for (int i = 0; i < ve.size(); i++) {
+            cout << ve[i].getItemNo() << ". " << ve[i].getItem() << ": " << ve[i].getPrice() << endl;
+        }
+    }
+
+    void takeOrder() {
+        int ord, quant;
+        cout << "Enter item No for order: ";
+        cin >> ord;
+        cout << "Enter quantity of item: ";
+        cin >> quant;
+
+        for (int i = 0; i < ve.size(); i++) {
+            if (ord == ve[i].getItemNo()) {
+                int total = quant * ve[i].getPrice();
+                cout << "Total bill: " << total << endl << endl;
+                return;
+            }
+        }
+        cout << "Item not found!" << endl;
+    }
+};
+
+int main() {
+    Cafe cafe;
+    cafe.add(1, "Chicken Burger", 150);
+    cafe.add(2, "Zinger Burger", 250);
+    cafe.add(3, "Potato Chips", 50);
+    cafe.add(4, "Juice", 100);
+
+    cout << "<<<< Cafeteria Menu >>>>" << endl;
+    cafe.order();
+    cafe.takeOrder();
+
+    return 0;
+}
