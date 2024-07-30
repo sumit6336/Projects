@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int rollNo;
+
+public:
+    Student(string Name, int RollNo) {
+        name = Name;
+        rollNo = RollNo;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    int getRollNo() {
+        return rollNo;
+    }
+};
+
+vector<Student> ve;
+
+void reportCard() {
+    int rn;
+    cout << "Enter RollNo: "; 
+    cin >> rn;
+
+    for(int i = 0; i < ve.size(); i++) {
+        if(rn == ve[i].getRollNo()) {
+            int subj1, subj2, subj3, total;
+            cout << "Enter numbers of subject1: "; cin >> subj1;
+            cout << "Enter numbers of subject2: "; cin >> subj2;
+            cout << "Enter numbers of subject3: "; cin >> subj3;
+            cout << "Enter total numbers: "; cin >> total;
+
+            int totalNo = subj1 + subj2 + subj3;
+            int avg = totalNo / 3;
+            int per = 100 * totalNo / total;
+
+            cout << "Percentage of numbers: " << per << "%" << endl;
+        }
+    }
+}
+
+int main() {
+    string Name;
+    int RollNo;
+    cout << "<<<<<<< Report Card >>>>>>>" << endl;
+    int value;
+
+    while(true) {
+        cout << "Enter '1' for add student" << endl;
+        cout << "Enter '2' for report card" << endl;
+        cout << "Enter '0' for exit from program" << endl;
+        cout << "Enter choice: "; 
+        cin >> value;
+
+        if(value == 1) {
+            cout << "Enter Name: "; 
+            cin >> Name;
+            cout << "Enter RollNo: "; 
+            cin >> RollNo;
+            ve.push_back(Student(Name, RollNo));
+        } 
+        else if(value == 2) {
+            reportCard();
+        } 
+        else if(value == 0) {
+            break;
+        }
+    }
+
+    return 0;
+}
